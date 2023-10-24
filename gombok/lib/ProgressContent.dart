@@ -20,12 +20,14 @@ class ProgressContent extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Center(
-          child: Text(
-            text,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: style.textStylePrimary,
+        Expanded(
+          child: Center(
+            child: Text(
+              text,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(color: color),
+            ),
           ),
         ),
         if (isLoading && isShowProgress)
@@ -34,8 +36,8 @@ class ProgressContent extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 15),
               child: SizedBox(
-                width: 15,
-                height: 15,
+                width: 20,
+                height: 20,
                 child: CupertinoActivityIndicator(
                   color: color,
                 ),

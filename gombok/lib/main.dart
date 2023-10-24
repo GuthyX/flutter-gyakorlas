@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: <Widget>[
                       Button(
                           isProgressShow: true,
-                          isDisable: true,
+                          isDisable: false,
                           height: 50,
                           buttonText: string.textButtonPrimary,
                           buttonType: ButtonType.primary,
@@ -82,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 15,
                       ),
                       Button(
+                        isProgressShow: true,
                         isDisable: false,
                         height: 50,
                         buttonText: string.textButtonSecondary,

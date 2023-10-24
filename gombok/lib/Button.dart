@@ -84,10 +84,11 @@ class _ButtonState extends State<Button> {
             ),
             onPressed:
                 widget.isDisable || isLoading ? null : onPressedWithCustomLogic,
-            child: Text(
-              widget.buttonText,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
+            child: ProgressContent(
+              color: color.textcolorSecondary,
+              isLoading: isLoading,
+              isShowProgress: widget.isProgressShow,
+              text: widget.buttonText,
             ),
           ),
         );

@@ -23,5 +23,7 @@ final ButtonStyle buttonSecondary = ElevatedButton.styleFrom(
     padding: const EdgeInsets.symmetric(horizontal: 15.0),
     foregroundColor: color.textcolorSecondary);
 
-final TextStyle textStylePrimary = TextStyle(color: color.textcolorPrimary);
+final TextStyle textStylePrimary = TextStyle(
+  color: color.textcolorPrimary,
+);
 final TextStyle textStyleSecondary = TextStyle(color: color.textcolorSecondary);

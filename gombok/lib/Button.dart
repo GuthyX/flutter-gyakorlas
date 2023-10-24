@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gombok/ProgressContent.dart';
 import 'style.dart' as primary_style;
@@ -8,9 +10,13 @@ class Button extends StatefulWidget {
   final VoidCallback onPressed;
   final ButtonType buttonType;
   final double height;
+  final bool isProgressShow;
+  final bool isDisable;
 
   Button({
     Key? key,
+    required this.isDisable,
+    this.isProgressShow = false,
     required this.buttonText,
     required this.buttonType,
     required this.onPressed,
@@ -23,22 +29,21 @@ class Button extends StatefulWidget {
 
 class _ButtonState extends State<Button> {
   bool isLoading = false;
-
-  void onPressedWithCustomLogic() {
-    // Execute additional logic here before changing the loading state.
+  void onPressedWithCustomLogic() async {
     setState(() {
       isLoading = true;
     });
 
-    // You can add more logic if needed.
-
-    // Call the original onPressed function.
     widget.onPressed();
 
-    // Reset the loading state when the operation is completed.
+    await Future.delayed(const Duration(seconds: 5));
     setState(() {
+      debugPrint('Button1: In timmer');
       isLoading = false;
     });
+    /* setState(() {
+      isLoading = false;
+    }); */
   }
 
   @override
@@ -61,8 +66,8 @@ class _ButtonState extends State<Button> {
             child: ProgressContent(
               color: color.textcolorPrimary,
               isLoading: isLoading,
-              text:
-                  "tesztssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+              isShowProgress: widget.isProgressShow,
+              text: widget.buttonText,
             ),
           ),
         );
@@ -77,7 +82,8 @@ class _ButtonState extends State<Button> {
                 ),
               ),
             ),
-            onPressed: isLoading ? null : onPressedWithCustomLogic,
+            onPressed:
+                widget.isDisable || isLoading ? null : onPressedWithCustomLogic,
             child: Text(
               widget.buttonText,
               overflow: TextOverflow.ellipsis,

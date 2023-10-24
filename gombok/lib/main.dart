@@ -42,78 +42,60 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isLoading1 = false;
+  bool isLoading2 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Button(
-                height: 50,
-                buttonText: string.textButtonPrimary,
-                buttonType: ButtonType.primary,
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text(string.textButtonPrimary),
-                        content: Text(string.alertDialogContent),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              // Close the dialog
-                              Navigator.of(context).pop();
-                            },
-                            child: Text(string.alertDialogOK),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }),
-            const SizedBox(
-              height: 15,
-            ),
-            Button(
-              height: 50,
-              buttonText: string.textButtonSecondary,
-              buttonType: ButtonType.secondary,
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text(string.textButtonSecondary),
-                      content: Text(string.alertDialogContent),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            // Close the dialog
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(string.alertDialogOK),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-          ],
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
         ),
-      ),
-    );
+        body: Stack(
+          children: [
+            SizedBox(
+              width: double.maxFinite,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('button 1 : $isLoading1'),
+                  Text('button 2 : $isLoading2'),
+                ],
+              ),
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Align(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Button(
+                          isProgressShow: true,
+                          isDisable: true,
+                          height: 50,
+                          buttonText: string.textButtonPrimary,
+                          buttonType: ButtonType.primary,
+                          onPressed: () {}),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Button(
+                        isDisable: false,
+                        height: 50,
+                        buttonText: string.textButtonSecondary,
+                        buttonType: ButtonType.secondary,
+                        onPressed: () {},
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ),
+                )),
+          ],
+        ));
   }
 
   /* double calculateButtonHeight(BuildContext context) {

@@ -25,7 +25,10 @@ class _DatePickerState extends State<DatePicker> {
         children: <Widget>[
           IconButton(
             style: style.roundButton,
-            icon: Icon(Icons.arrow_back),
+            icon: const Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: Icon(Icons.arrow_back_ios),
+            ),
             onPressed: widget.onBackPressed,
           ),
           Expanded(
@@ -46,7 +49,7 @@ class _DatePickerState extends State<DatePicker> {
             style: widget.selectedDate.isBefore(DateTime.now())
                 ? style.roundButton
                 : style.disableRoundButton,
-            icon: Icon(Icons.arrow_forward),
+            icon: Icon(Icons.arrow_forward_ios),
             onPressed: widget.selectedDate.isBefore(DateTime.now())
                 ? widget.onFowardPressed
                 : null,

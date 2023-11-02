@@ -23,6 +23,24 @@ final ButtonStyle buttonSecondary = ElevatedButton.styleFrom(
     padding: const EdgeInsets.symmetric(horizontal: 15.0),
     foregroundColor: color.textcolorSecondary);
 
+final ButtonStyle roundButton = ElevatedButton.styleFrom(
+    elevation: 0,
+    shape: const CircleBorder(),
+    side: BorderSide(
+      width: 1.0,
+      color: color.colorPrimary,
+    ),
+    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+    foregroundColor: color.textcolorSecondary);
+final ButtonStyle disableRoundButton = ElevatedButton.styleFrom(
+    elevation: 0,
+    shape: const CircleBorder(),
+    side: BorderSide(
+      width: 1.0,
+      color: color.enable,
+    ),
+    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+    foregroundColor: color.textcolorSecondary);
 final TextStyle textStylePrimary = TextStyle(
   color: color.textcolorPrimary,
 );

@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gombok/Button.dart';
+import 'package:gombok/DatePicker.dart';
 import 'package:gombok/String.dart' as string;
+import 'DatePicker.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,6 +49,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool isLoading1 = false;
   bool isLoading2 = false;
+  DateTime currentDate = DateTime(2020, 07);
+  DateTime selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +60,27 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Stack(
           children: [
+            Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                DatePicker(
+                  currentDate,
+                  (currentDate) => null,
+                  () => {
+                    setState(() {
+                      currentDate =
+                          DateTime(currentDate.year, currentDate.month - 1);
+                    }),
+                  },
+                  () => {
+                    setState(() {
+                      currentDate =
+                          DateTime(currentDate.year, currentDate.month + 1);
+                    }),
+                  },
+                ),
+              ],
+            ),
             SizedBox(
               width: double.maxFinite,
               child: Column(
@@ -61,6 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text('button 1 : $isLoading1'),
                   Text('button 2 : $isLoading2'),
+                  Text(
+                      'Selected Date : ${selectedDate?.year} ${DateFormat('MMMM').format(selectedDate)}'),
                 ],
               ),
             ),
@@ -72,22 +102,47 @@ class _MyHomePageState extends State<MyHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Button(
-                          isProgressShow: true,
-                          isDisable: false,
-                          height: 50,
-                          buttonText: string.textButtonPrimary,
-                          buttonType: ButtonType.primary,
-                          onPressed: () {}),
+                        height: 50,
+                        buttonText: string.textButtonPrimary,
+                        isProgress: isLoading1,
+                        onProgress: (isProgress) {
+                          debugPrint('Button1: $isProgress');
+                          isProgress = !isProgress;
+                        },
+                        buttonType: ButtonType.primary,
+                        onPressed: () {
+                          setState(() {
+                            isLoading1 = !isLoading1;
+                          });
+                          Timer(Duration(seconds: 3), () {
+                            setState(() {
+                              isLoading1 = !isLoading1;
+                            });
+                          });
+                        },
+                      ),
                       const SizedBox(
                         height: 15,
                       ),
                       Button(
-                        isProgressShow: true,
-                        isDisable: false,
                         height: 50,
+                        isProgress: isLoading2,
+                        onProgress: (isProgress) {
+                          debugPrint('Button2: $isProgress');
+                        },
                         buttonText: string.textButtonSecondary,
                         buttonType: ButtonType.secondary,
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            isLoading2 = !isLoading2;
+                            selectedDate = currentDate;
+                          });
+                          Timer(Duration(seconds: 3), () {
+                            setState(() {
+                              isLoading2 = !isLoading2;
+                            });
+                          });
+                        },
                       ),
                       const SizedBox(
                         height: 15,

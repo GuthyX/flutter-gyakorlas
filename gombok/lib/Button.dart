@@ -10,17 +10,19 @@ class Button extends StatefulWidget {
   final VoidCallback onPressed;
   final ButtonType buttonType;
   final double height;
-  final bool isProgressShow;
-  final bool isDisable;
+  final bool isProgress;
+  final bool isEnabled;
+  final Function(bool)? onProgress;
 
   Button({
     Key? key,
-    required this.isDisable,
-    this.isProgressShow = false,
     required this.buttonText,
     required this.buttonType,
     required this.onPressed,
     required this.height,
+    this.isEnabled = true,
+    this.isProgress = false,
+    this.onProgress,
   }) : super(key: key);
 
   @override
@@ -29,21 +31,16 @@ class Button extends StatefulWidget {
 
 class _ButtonState extends State<Button> {
   bool isLoading = false;
+  @override
+  void didUpdateWidget(covariant Button oldWidget) {
+    _updateOnProgressCallback();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void _updateOnProgressCallback() =>
+      widget.onProgress != null ? widget.onProgress!(widget.isProgress) : null;
   void onPressedWithCustomLogic() async {
-    setState(() {
-      isLoading = true;
-    });
-
     widget.onPressed();
-
-    await Future.delayed(const Duration(seconds: 5));
-    setState(() {
-      debugPrint('Button1: In timmer');
-      isLoading = false;
-    });
-    /* setState(() {
-      isLoading = false;
-    }); */
   }
 
   @override
@@ -62,11 +59,11 @@ class _ButtonState extends State<Button> {
                 ),
               ),
             ),
-            onPressed: isLoading ? null : onPressedWithCustomLogic,
+            onPressed: widget.isProgress ? null : onPressedWithCustomLogic,
             child: ProgressContent(
               color: color.textcolorPrimary,
-              isLoading: isLoading,
-              isShowProgress: widget.isProgressShow,
+              isLoading: widget.isProgress,
+              isShowProgress: widget.isProgress,
               text: widget.buttonText,
             ),
           ),
@@ -82,12 +79,11 @@ class _ButtonState extends State<Button> {
                 ),
               ),
             ),
-            onPressed:
-                widget.isDisable || isLoading ? null : onPressedWithCustomLogic,
+            onPressed: widget.isProgress ? null : onPressedWithCustomLogic,
             child: ProgressContent(
               color: color.textcolorSecondary,
-              isLoading: isLoading,
-              isShowProgress: widget.isProgressShow,
+              isLoading: widget.isProgress,
+              isShowProgress: widget.isProgress,
               text: widget.buttonText,
             ),
           ),

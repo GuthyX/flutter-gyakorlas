@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'style.dart' as style;
 
@@ -30,7 +31,7 @@ class ProgressContent extends StatelessWidget {
             ),
           ),
         ),
-        if (isLoading && isShowProgress)
+        if (isLoading)
           Align(
             alignment: Alignment.centerRight,
             child: Padding(
@@ -38,9 +39,13 @@ class ProgressContent extends StatelessWidget {
               child: SizedBox(
                 width: 20,
                 height: 20,
-                child: CupertinoActivityIndicator(
-                  color: color,
-                ),
+                child: defaultTargetPlatform == TargetPlatform.iOS
+                    ? CupertinoActivityIndicator(
+                        color: color,
+                      )
+                    : CircularProgressIndicator(
+                        color: color,
+                      ),
               ),
             ),
           ),

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gombok/ProgressContent.dart';
-import 'style.dart' as primary_style;
-import 'package:gombok/Color.dart' as color;
+import '../res/style.dart' as primary_style;
+import 'package:gombok/res/Color.dart' as color;
 
 class Button extends StatefulWidget {
   final String buttonText;
@@ -72,16 +72,26 @@ class _ButtonState extends State<Button> {
         return SizedBox(
           height: widget.height,
           child: ElevatedButton(
-            style: primary_style.buttonSecondary.copyWith(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(borderRadius),
-                ),
-              ),
-            ),
+            style: widget.isProgress == false
+                ? primary_style.buttonSecondary.copyWith(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(borderRadius),
+                      ),
+                    ),
+                  )
+                : primary_style.disableButtonSecondary.copyWith(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(borderRadius),
+                      ),
+                    ),
+                  ),
             onPressed: widget.isProgress ? null : onPressedWithCustomLogic,
             child: ProgressContent(
-              color: color.textcolorSecondary,
+              color: widget.isProgress == false
+                  ? color.textcolorSecondary
+                  : color.enable,
               isLoading: widget.isProgress,
               isShowProgress: widget.isProgress,
               text: widget.buttonText,

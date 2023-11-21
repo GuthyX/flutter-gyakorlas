@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gombok/Color.dart' as color;
+import 'package:gombok/res/Color.dart' as color;
 
 final ButtonStyle buttonPrimary = ElevatedButton.styleFrom(
     backgroundColor: color.colorPrimary,
@@ -22,6 +22,18 @@ final ButtonStyle buttonSecondary = ElevatedButton.styleFrom(
     ),
     padding: const EdgeInsets.symmetric(horizontal: 15.0),
     foregroundColor: color.textcolorSecondary);
+final ButtonStyle disableButtonSecondary = ElevatedButton.styleFrom(
+    backgroundColor: color.colorSecondaty,
+    elevation: 0,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(0)),
+    ),
+    side: BorderSide(
+      width: 2.0,
+      color: color.enable,
+    ),
+    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+    foregroundColor: color.enable);
 
 final ButtonStyle roundButton = ElevatedButton.styleFrom(
     elevation: 0,

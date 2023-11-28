@@ -5,6 +5,7 @@ import 'package:gombok/CustomObjects/Button.dart';
 import 'package:gombok/CustomObjects/CustomFormatter.dart';
 import 'package:gombok/pages/PurchaseScreen.dart';
 import 'package:gombok/res/String.dart' as string;
+import 'package:gombok/res/Color.dart' as color;
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,6 +22,15 @@ class _MainScreen extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:
+            color.appBarBackgroundColor, // Set the background color
+        elevation: 0, // Remove the shadow
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20.0), // Adjust the radius as needed
+            bottomRight: Radius.circular(20.0), // Adjust the radius as needed
+          ),
+        ),
         title: const Text('Main screen'),
       ),
       body: Stack(

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gombok/CustomObjects/Button.dart';
 import 'package:gombok/CustomObjects/CustomFormatter.dart';
-import 'package:gombok/pages/PurchaseScreen.dart';
 import 'package:gombok/res/String.dart' as string;
 import 'package:gombok/res/Color.dart' as color;
 

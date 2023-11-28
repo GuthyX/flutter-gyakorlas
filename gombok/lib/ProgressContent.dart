@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'res/style.dart' as style;
 
 class ProgressContent extends StatelessWidget {
   final String text;

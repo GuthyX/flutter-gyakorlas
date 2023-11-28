@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:gombok/ProgressContent.dart';
 import '../res/style.dart' as primary_style;

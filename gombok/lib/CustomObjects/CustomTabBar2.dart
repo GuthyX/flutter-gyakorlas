@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gombok/model/TabItem.dart';
 import 'package:gombok/res/Color.dart' as CustomColor;
-import 'package:gombok/res/style.dart' as style;
 
 class CustomTabBar2 extends StatefulWidget {
   final List<TabItem> tabs;

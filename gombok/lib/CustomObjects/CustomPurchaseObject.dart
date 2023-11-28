@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gombok/CustomObjects/CustomFormatter.dart';
 import 'package:gombok/model/PurchaseModel.dart';
 import 'package:gombok/model/TabItem.dart';
-import 'package:intl/intl.dart';
 
 class CustomPurchaseObject extends StatefulWidget {
   final PurchaseModel purchase;

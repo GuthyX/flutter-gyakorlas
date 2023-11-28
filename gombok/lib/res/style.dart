@@ -46,10 +46,11 @@ final ButtonStyle roundButton = ElevatedButton.styleFrom(
     foregroundColor: color.textcolorSecondary);
 final ButtonStyle disableRoundButton = ElevatedButton.styleFrom(
     elevation: 0,
-    shape: const CircleBorder(),
-    side: BorderSide(
-      width: 1.0,
-      color: color.enable,
+    shape: CircleBorder(
+      side: BorderSide(
+        width: 1.0,
+        color: color.enable,
+      ),
     ),
     padding: const EdgeInsets.symmetric(horizontal: 15.0),
     foregroundColor: color.textcolorSecondary);

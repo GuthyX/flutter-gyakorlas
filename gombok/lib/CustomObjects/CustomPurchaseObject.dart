@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gombok/CustomObjects/CustomFormatter.dart';
 import 'package:gombok/model/PurchaseModel.dart';
 import 'package:gombok/model/TabItem.dart';
+import 'package:gombok/res/Color.dart' as color;
 
 class CustomPurchaseObject extends StatefulWidget {
   final PurchaseModel purchase;
+  final Function()? onClick;
 
-  const CustomPurchaseObject({Key? key, required this.purchase})
+  const CustomPurchaseObject(
+      {Key? key, required this.purchase, required this.onClick})
       : super(key: key);
 
   @override
@@ -16,66 +19,76 @@ class CustomPurchaseObject extends StatefulWidget {
 class _CustomPurchaseObject extends State<CustomPurchaseObject> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            const SizedBox(
-              width: 15,
-            ),
-            Icon(
-              getIcon(widget.purchase.type),
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    CustomFormatter.formatCurrency(
-                        widget.purchase.price.round(), 'hu_HU'),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    CustomFormatter.FormatDateTime(widget.purchase.date),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    widget.purchase.randomNum,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w500, color: Colors.grey),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
+    return InkWell(
+      onTap: widget.onClick,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const SizedBox(
+                width: 15,
               ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.arrow_forward_ios),
-              onPressed: () => {},
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-          ],
-        ),
-        const Divider(
-          height: 10,
-        ),
-      ],
+              Container(
+                padding: const EdgeInsets.all(4.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: color.colorPrimary, // Set the color of the border
+                    width: 2.0, // Set the width of the border
+                  ),
+                ),
+                child: Icon(
+                  getIcon(widget.purchase.type),
+                ),
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      CustomFormatter.formatCurrency(
+                          widget.purchase.price.round(), 'hu_HU'),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      CustomFormatter.FormatDateTime(widget.purchase.date),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      widget.purchase.randomNum,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.grey),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+          const Divider(
+            height: 10,
+          ),
+        ],
+      ),
     );
   }
 }

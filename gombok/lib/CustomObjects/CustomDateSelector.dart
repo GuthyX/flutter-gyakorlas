@@ -40,7 +40,7 @@ class _CustomDateSelector extends State<CustomDateSelector> {
                   const EdgeInsets.symmetric(vertical: 8, horizontal: 15.0),
               child: Text(
                 '${widget.selectedDate.year}. ${CustomFormatter.formatMonth(widget.selectedDate)}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -48,7 +48,7 @@ class _CustomDateSelector extends State<CustomDateSelector> {
             ),
           ),
           IconButton(
-            style: widget.selectedDate.isBefore(DateTime.now())
+            style: widget.selectedDate.month != DateTime.now().month
                 ? style.roundButton
                 : style.disableRoundButton,
             icon: const Icon(Icons.arrow_forward_ios),

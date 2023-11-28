@@ -8,41 +8,41 @@ typedef ErrorCallback = void Function(dynamic error);
 
 class PurchaseViewModel {
   late final repository = PurchaseRepository();
-  late List<PurchaseModel> purchaseList = [];
-  late Future<List<PurchaseModel>> futurePurchaseData;
-  late List<PurchaseModel> listOfOtherPurchase = [];
-  late List<PurchaseModel> listOfAllPurchase = [];
-  late List<PurchaseModel> listOfParking = [];
-  late List<PurchaseModel> listOfShop = [];
 
-  Future<void> loadPurchaseList({
-    required PurchaseListCallback onSuccess,
-    required ErrorCallback onError,
-  }) async {
+  Future<List<PurchaseModel>> loadPurchaseList() async {
     try {
       List<PurchaseModel> result = await repository.fetchData();
-      purchaseList = result;
-      print("Loaded list : $purchaseList");
-      onSuccess(result); // Call the success callback with the result
+      print("Loaded list : $result");
+      return result;
     } catch (error) {
-      // Handle any errors that occurred during the fetchData operation
       print("Error fetching data in viewmodel: $error");
-      onError(error); // Call the error callback with the error
+      return List.empty();
     }
   }
 
-  updateLists(DateTime currentDate) {
-    listOfParking =
-        repository.filterListByType(purchaseList, currentDate, Pages.parking);
-    listOfAllPurchase =
-        repository.filterListByType(purchaseList, currentDate, Pages.all);
-    listOfShop =
-        repository.filterListByType(purchaseList, currentDate, Pages.shop);
-    listOfOtherPurchase =
-        repository.filterListByType(purchaseList, currentDate, Pages.other);
-  }
-
-  getPurchaseList() {
-    return purchaseList;
+  getList(Pages page, List<PurchaseModel>? data, DateTime currentDate) {
+    switch (page) {
+      case Pages.all:
+        if (data != null) {
+          return repository.filterListByType(data, currentDate, page);
+        }
+        break;
+      case Pages.other:
+        if (data != null) {
+          return repository.filterListByType(data, currentDate, page);
+        }
+        break;
+      case Pages.parking:
+        if (data != null) {
+          return repository.filterListByType(data, currentDate, page);
+        }
+        break;
+      case Pages.shop:
+        if (data != null) {
+          return repository.filterListByType(data, currentDate, page);
+        }
+        break;
+      default:
+    }
   }
 }
